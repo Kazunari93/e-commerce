@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/original.svg";
+import { CarIcon } from "../cart-icon/cart-icon.component";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import "./header.styles.scss";
@@ -24,10 +25,10 @@ const Header = ({ currentUser }) => {
           </div>
         ) : (
           <Link className="option" to="/signin">
-            {" "}
             SIGN IN
           </Link>
         )}
+        <CarIcon />
       </div>
     </div>
   );
