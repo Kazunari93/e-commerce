@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/original.svg";
-import { CarIcon } from "../cart-icon/cart-icon.component";
+import CarIcon from "../cart-icon/cart-icon.component";
+import CartDropDown from "../cart/cart-dropdown.component";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import "./header.styles.scss";
@@ -30,6 +31,7 @@ const Header = ({ currentUser }) => {
         )}
         <CarIcon />
       </div>
+      <CartDropDown />
     </div>
   );
 };
