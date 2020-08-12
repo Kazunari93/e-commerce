@@ -6,6 +6,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../redux/cart/cart.selectors";
+import StripeButton from "../../components/stripe-button/stripe-button.component";
 import "./checkout.styles.scss";
 
 const CheckoutPage = ({ cartItems, total }) => {
@@ -33,6 +34,14 @@ const CheckoutPage = ({ cartItems, total }) => {
       ))}
       <div className="total">
         <span> TOTAL : ${total}</span>
+      </div>
+      <div className="test-warning">
+        テスト用のクレジットカード番号
+        <br />
+        4242 4242 4242 4242 月日: 08/31 CVC: 123
+      </div>
+      <div className="button">
+        <StripeButton price={total} />
       </div>
     </div>
   );
