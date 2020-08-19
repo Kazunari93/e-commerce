@@ -2,12 +2,10 @@ import styled, { css } from "styled-components";
 
 const invertedButtonStyles = css`
   background-color: #afaaca;
-  color: black;
   border: none;
 
   &:hover {
     background-color: #928ea7;
-    border: 1px solid black;
   }
 `;
 
@@ -25,12 +23,11 @@ const buttonStyles = css`
   border: none;
   &:hover {
     background-color: #f1abc8;
-    color: black;
   }
 `;
 
 const getButtonStyles = (props) => {
-  if (props.googleSignIn) {
+  if (props.isGoogleSignIn) {
     return googleSignInStyles;
   }
 
