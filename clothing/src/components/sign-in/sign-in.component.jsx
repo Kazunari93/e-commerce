@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import { auth } from "../../firebase/firebase.utils";
 import "./sign-in.styles.scss";
 import {
   googleSignInStart,
@@ -32,7 +31,7 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    setCredentials({ [name]: value });
+    setCredentials({ ...userCredentials, [name]: value });
   };
 
   return (
@@ -73,7 +72,8 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
-  emailSignInStart: () => dispatch(emailSignInStart({ email, password })),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password })),
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);
