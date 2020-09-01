@@ -13,72 +13,60 @@ import {
   auth,
   createUserProfileDocument,
 } from "../src/firebase/firebase.utils";
+import { checkUserSession } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-class App extends React.Component {
-  unSubscribeFromAuth = null;
+const App = ({ checkUserSession, currentUser }) => {
+  // unSubscribeFromAuth = null;
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
-  //     if (userAuth) {
-  //       const userRef = await createUserProfileDocument(userAuth);
+  useEffect(() => {
+    checkUserSession();
+  }, [checkUserSession]);
 
-  //       userRef.onSnapshot((snapShot) => {
-  //         setCurrentUser({
-  //           id: snapShot.id,
-  //           ...snapShot.data(),
-  //         });
+  // componentDidMount() {
+  // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  //   if (userAuth) {
+  //     const userRef = await createUserProfileDocument(userAuth);
+  //     userRef.onSnapshot((snapShot) => {
+  //       setCurrentUser({
+  //         id: snapShot.id,
+  //         ...snapShot.data(),
   //       });
-  //     } else {
-  //       setCurrentUser(userAuth);
-  //     }
-  //   });
-  //   return unsubscribe;
-  // }, []);
+  //     });
+  //   }
+  //   setCurrentUser(userAuth);
+  // });
 
-  componentDidMount() {
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot((snapShot) => {
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data(),
-    //       });
-    //     });
-    //   }
-    //   setCurrentUser(userAuth);
-    // });
-  }
+  // componentWillUnmount() {
+  //   this.unSubscribeFromAuth();
+  // }
 
-  componentWillUnmount() {
-    this.unSubscribeFromAuth();
-  }
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              this.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
-            }
-          />
-        </Switch>
-      </div>
-    );
-  }
-}
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+          }
+        />
+      </Switch>
+    </div>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

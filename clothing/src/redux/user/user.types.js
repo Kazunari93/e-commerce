@@ -4,6 +4,7 @@ const UserActionTypes = {
   SIGN_SUCCESS: "SIGN_SUCCESS",
   SIGN_FAILURE: "SIGN_FAILURE",
   EMAIL_SIGN_START: "EMAIL_SIGN_START",
+  CHECK_USER_SESSION: "CHECK_USER_SESSION",
 };
 
 export default UserActionTypes;
