@@ -19,12 +19,6 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // try {
-    //   await auth.signInWithEmailAndPassword(email, password);
-    //   setCredentials({ email: "", password: "" });
-    // } catch (err) {
-    //   console.log(err);
-    // }
     emailSignInStart(email, password);
   };
 

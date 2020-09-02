@@ -9,16 +9,10 @@ import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import CheckoutPage from "./pages/checkout/checkout.component";
-import {
-  auth,
-  createUserProfileDocument,
-} from "../src/firebase/firebase.utils";
 import { checkUserSession } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
 const App = ({ checkUserSession, currentUser }) => {
-  // unSubscribeFromAuth = null;
-
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession]);
